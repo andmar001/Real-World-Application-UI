@@ -1,1 +1,4 @@
-export const environment = {};
+export const environment = {
+  production: true,
+  apiBaseUrl: 'https://localhost:44367/api'
+};
