@@ -19,4 +19,8 @@ export class CategoryService {
   getAllCategories():Observable<Category[]>{
     return this._htpp.get<Category[]>(`${environment.apiBaseUrl}/categories`);
   }
+
+  getCategoryById( id:string ):Observable<Category>{
+    return this._htpp.get<Category>(`${environment.apiBaseUrl}/categories/${id}`);
+  }
 }
