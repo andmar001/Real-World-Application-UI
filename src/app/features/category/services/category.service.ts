@@ -28,4 +28,8 @@ export class CategoryService {
   updatedCategory( id:string, updateCategoryRequest:UpdateCategoryRequest ) : Observable<Category>{
     return this._htpp.put<Category>(`${environment.apiBaseUrl}/categories/${id}`,updateCategoryRequest);
   }
+
+  deleteCategory(id:string):Observable<Category>{
+    return this._htpp.delete<Category>(`${environment.apiBaseUrl}/categories/${id}`);
+  }
 }
