@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AddBlogPost } from '../models/add-blog-post.model';
+import { BlogPostService } from '../services/blog-post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -9,13 +11,15 @@ import { AddBlogPost } from '../models/add-blog-post.model';
 export class AddBlogpostComponent {
   model:AddBlogPost;
 
-  constructor(){
+  constructor( private _blogPostService:BlogPostService,
+               private _router:Router
+  ){
     this.model ={
       title: '',
       shortDescription: '',
-      urlHandle: '',
+      urlHandler: '',
       content: '',
-      featuredUImageUrl: '',
+      FeaturedImageUrl: '',
       author: '',
       publishedDate: new Date(),
       isVisible: true
@@ -23,7 +27,15 @@ export class AddBlogpostComponent {
   }
 
   onFormSubmit(){
-    console.log(this.model);
+    this._blogPostService.createBlogPost(this.model)
+      .subscribe({
+        next:( response )=>{
+          this._router.navigate(['/admin/blogposts']);
+        },
+        error:(err)=>{
+          alert('Error Occured');
+        }
+      })
   }
 
 }
